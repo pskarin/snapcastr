@@ -6,7 +6,7 @@ from flask_nav import Nav
 from flask_nav.elements import Navbar, Subgroup, Separator, View
 # wtforms
 from wtforms import Form
-from wtforms.fields import HiddenField, SelectField, SubmitField, TextField, BooleanField
+from wtforms.fields import HiddenField, SelectField, SubmitField, TextField, BooleanField, StringField
 from wtforms.fields.html5 import IntegerRangeField
 # snapcast
 import snapcast.control
@@ -48,6 +48,7 @@ start_server.addr='localhost'
 
 class volumeSliderForm(Form):
     hf = HiddenField()
+    name = StringField()
     slider = IntegerRangeField(label='volume')
 
 class streamSelectForm(Form):
@@ -104,7 +105,8 @@ def basep(page):
             form = volumeSliderForm(csrf_enabled=False)
             form.slider.default = client.volume
             form.process()
-            form.hf.data = client.friendly_name
+            form.hf.data = client.identifier
+            form.name.data = client.friendly_name
             forms.append(form)
         return render_template('clients.html', page=page, forms=forms)
     elif ( page == 'groups' ):
