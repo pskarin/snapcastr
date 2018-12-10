@@ -59,6 +59,7 @@ class streamSelectForm(Form):
 
 class assignForm(Form):
   hf = HiddenField()
+  name = StringField()
   select = SelectField(label='groups')
 
 @app.route('/')
@@ -137,7 +138,8 @@ def basep(page):
                     for group in snapserver.groups]
             form.select.default = client.group.identifier
             form.process()
-            form.hf.data = client.friendly_name
+            form.name.data = client.friendly_name
+            form.hf.data = client.identifier
             forms.append(form)
         return render_template('zones.html', page=page, forms=forms)
     else:

@@ -13,8 +13,8 @@
   </tr>
   {% for form in forms %}
   <tr>
-    <td><div><br/> {{ form.hf.data }} {{ form.hf }} </div></td>
-    <td> {{ form.select }} </td>
+    <td><div><br/> {{ form.name.data }} {{ form.hf }} </div></td>
+    <td> {{ form.select(onchange="this.form.submit()") }} </td>
   </tr>
   {% endfor %}
   <tr><td>

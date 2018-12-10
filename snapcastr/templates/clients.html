@@ -14,7 +14,7 @@
   {% for form in forms %}
   <tr>
     <td><div><br/> {{ form.name.data }} {{ form.hf }} </div></td>
-    <td><div class=sc-slider> {{ form.slider }} </div></td>
+    <td><div class=sc-slider> {{ form.slider(onchange="this.form.submit()") }} </div></td>
   </tr>
   {% endfor %}
   <tr><td>

@@ -23,7 +23,7 @@
         {{ client }} <br/>
       {% endfor%}
     </td>
-    <td> {{ form.select }} </td>
+    <td> {{ form.select(onchange="this.form.submit()") }} </td>
   </tr>
   {% endfor %}
   <tr><td>
