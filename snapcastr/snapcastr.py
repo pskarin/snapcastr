@@ -100,10 +100,11 @@ def basep(page):
     if ( page == 'clients' ):
         forms = []
         for client in snapserver.clients:
+          if client.connected:
             form = volumeSliderForm(csrf_enabled=False)
             form.slider.default = client.volume
             form.process()
-            form.hf.data = client.identifier
+            form.hf.data = client.friendly_name
             forms.append(form)
         return render_template('clients.html', page=page, forms=forms)
     elif ( page == 'groups' ):
@@ -128,12 +129,13 @@ def basep(page):
     elif ( page == 'zones' ):
         forms = []
         for client in snapserver.clients:
+          if client.connected:
             form = assignForm(csrf_enabled=False)
             form.select.choices = [(group.identifier, group.friendly_name + " : " + group.identifier)
                     for group in snapserver.groups]
             form.select.default = client.group.identifier
             form.process()
-            form.hf.data = client.identifier
+            form.hf.data = client.friendly_name
             forms.append(form)
         return render_template('zones.html', page=page, forms=forms)
     else:
